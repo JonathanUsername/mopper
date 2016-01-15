@@ -1,22 +1,22 @@
 {
-  "name": "node-starter-kit",
+  "name": "mopper",
   "version": "0.5.0",
-  "description": "A simple node starter kit ",
+  "description": "Mops up old node_modules",
   "repository": {
-    "type": "git",
-    "url": "git://github.com/pebblecode/node-starter-kit.git"
+    "type": "git"
   },
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
+    "start": "node lib/index.js",
     "compile": "babel --source-maps --out-dir lib/ src/",
+    "compile:watch": "babel --source-maps --out-dir lib/ src/ --watch",
     "lint": "eslint --ext .js --ext .jsx ./ && echo No linting errors.",
     "test": "node_modules/.bin/mocha test/ --recursive --compilers js:babel/register",
     "test:watch": "npm run test -- --watch",
     "coverage": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel/register --colors --reporter dot test/",
     "prepublish": "npm run compile"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": {
     "name": "PebbleCode",
     "email": "opensource@pebblecode.com",
@@ -24,6 +24,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "async": "~1.5.2",
+    "colors": "~1.1.2",
+    "inquirer": "~0.11.2",
+    "moment": "~2.11.1",
+    "npm": "~3.5.3"
   },
   "devDependencies": {
     "babel": "^5.x.x",
@@ -36,8 +41,8 @@
     "mocha": "^2.2.1",
     "pre-commit": "^1.0.6"
   },
-  "engines":{
-    "node":"4.x.x",
+  "engines": {
+    "node": "4.x.x",
     "npm": "2.x.x"
   }
 }
