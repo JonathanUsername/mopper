@@ -9,13 +9,8 @@ import colours from 'colors';
 // const maxAgeInSecs = moment(1, 'week').unix();
 const maxAgeInSecs = 1400;
 
+// I need a good way to find node_modules directories without accessing/reading them.
 const baseFilePath = path.resolve(__dirname, '../../');
-
-const localNodeModules = path.resolve(__dirname, '../node_modules');
-const otherNodeModules = path.resolve(__dirname, '../../cruk-api/node_modules');
-const paths = [];
-paths.push(localNodeModules);
-paths.push(otherNodeModules);
 
 function getStats(filepath, cb) {
   fs.stat(filepath, (err, stats) => {
@@ -105,6 +100,4 @@ function findCodeFolders(filepath) {
   });
 }
 
-
 findCodeFolders(baseFilePath);
-
