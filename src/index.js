@@ -40,21 +40,16 @@ function isOld(item) {
 function uninstallAllPackages(folderFilepath) {
   const packagePath = path.resolve(folderFilepath, 'package.json');
   const depsObj = require(packagePath).dependencies;
-  const params = Object.keys(depsObj);
-  const uninstall = spawn('npm', ['uninstall'].concat(params), {
+  const devDepsObj = require(packagePath).devDependencies || {};
+  const params = Object.keys(depsObj).concat(Object.keys(devDepsObj));
+  const uninstall = spawn('npm', ['uninstall', params], {
     cwd: folderFilepath
   });
-
   uninstall.stdout.on('data', (data) => {
     console.log(`${data}`.green);
   });
-
   uninstall.stderr.on('data', (data) => {
     console.log(`${data}`.yellow);
-  });
-
-  uninstall.on('close', (code) => {
-    console.log(`uninstall process exited with code ${code}`);
   });
 }
 
